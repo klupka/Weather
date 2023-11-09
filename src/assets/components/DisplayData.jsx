@@ -47,8 +47,9 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
     //cityRegionStr = cityRegionStr.toUpperCase();
 
     // Dynamic CSS Imports
-    if (weatherData.current.is_day === 1) import("../day.css");
-    if (weatherData.current.is_day === 0) import("../night.css");
+    import("../day.css");
+    // if (weatherData.current.is_day === 1) import("../day.css");
+    // if (weatherData.current.is_day === 0) import("../night.css");
 
     // Set current temperature
     const currentTemperature = Math.round(weatherData.current.temperature_2m);
@@ -205,13 +206,15 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
         let weatherIcon;
         switch (weatherCodeDesc) {
             case "clear_sky":
-                if (weatherData.current.is_day === 1) weatherIcon = icons.sun;
-                else weatherIcon = icons.moon;
+                // if (weatherData.current.is_day === 1) weatherIcon = icons.sun;
+                // else weatherIcon = icons.moon;
+                weatherIcon = icons.sun;
                 break;
             case "partly_cloudy":
-                if (weatherData.current.is_day === 1)
-                    weatherIcon = icons.cloudy_sun;
-                else weatherIcon = icons.cloudy_moon;
+                // if (weatherData.current.is_day === 1)
+                //     weatherIcon = icons.cloudy_sun;
+                // else weatherIcon = icons.cloudy_moon;
+                weatherIcon = icons.cloudy_sun;
                 break;
             case "fog":
                 weatherIcon = icons.fog;
