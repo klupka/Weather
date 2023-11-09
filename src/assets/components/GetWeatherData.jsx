@@ -6,8 +6,10 @@ const GetWeatherData = ({ setWeatherData, IPData }) => {
         "&current=temperature_2m,apparent_temperature,is_day,relative_humidity_2m,wind_speed_10m&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=GMT&forecast_days=14&current=weather_code&hourly=weather_code&daily=weather_code&wind_speed_unit=mph";
 
     if (IPData.length !== 0) {
-        const latCoord = IPData.lat;
-        const lonCoord = IPData.lon;
+        //const latCoord = IPData.lat;
+        //const lonCoord = IPData.lon;
+        const latCoord = IPData.latitude;
+        const lonCoord = IPData.longitude;
         const coordinatesStr =
             "?latitude=" + latCoord + "&longitude=" + lonCoord;
         const forecastURL = forecastBaseURL + coordinatesStr + forecastParams;
