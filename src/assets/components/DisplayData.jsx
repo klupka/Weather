@@ -11,8 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
-    //console.log(IPData);
-    // console.log(weatherData);
+    console.log("IPData", IPData);
+    console.log("weatherData", weatherData);
 
     // Set city and region
     const region = IPData.region;
@@ -47,9 +47,8 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
     //cityRegionStr = cityRegionStr.toUpperCase();
 
     // Dynamic CSS Imports
-    import("../day.css");
-    // if (weatherData.current.is_day === 1) import("../day.css");
-    // if (weatherData.current.is_day === 0) import("../night.css");
+    if (weatherData.current.is_day === 1) import("../day.css");
+    if (weatherData.current.is_day === 0) import("../night.css");
 
     // Set current temperature
     const currentTemperature = Math.round(weatherData.current.temperature_2m);
@@ -206,15 +205,13 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
         let weatherIcon;
         switch (weatherCodeDesc) {
             case "clear_sky":
-                // if (weatherData.current.is_day === 1) weatherIcon = icons.sun;
-                // else weatherIcon = icons.moon;
-                weatherIcon = icons.sun;
+                if (weatherData.current.is_day === 1) weatherIcon = icons.sun;
+                else weatherIcon = icons.moon;
                 break;
             case "partly_cloudy":
-                // if (weatherData.current.is_day === 1)
-                //     weatherIcon = icons.cloudy_sun;
-                // else weatherIcon = icons.cloudy_moon;
-                weatherIcon = icons.cloudy_sun;
+                if (weatherData.current.is_day === 1)
+                    weatherIcon = icons.cloudy_sun;
+                else weatherIcon = icons.cloudy_moon;
                 break;
             case "fog":
                 weatherIcon = icons.fog;
