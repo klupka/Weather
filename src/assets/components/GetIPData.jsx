@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const URL = "http://ip-api.com/json/";
+const URL = "https://ip-api.com/json/";
 
 const GetIPData = ({ setIPData }) => {
     useEffect(() => {
