@@ -1,0 +1,27 @@
+/* html {
+    background: #04051a;
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png);
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png),
+        linear-gradient(#04051a, #2d4265);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    z-index: 0;
+}
+*/
+.sun {
+    display: none;
+}
+
+html {
+    background-color: #3a7aba;
+    background: linear-gradient(#04051a, #2d4265);
+    background-attachment: fixed;
+}
+
+::-webkit-scrollbar:vertical {
+    background: linear-gradient(#04051a, #2d4265);
+}
