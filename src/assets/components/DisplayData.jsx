@@ -15,7 +15,7 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
     console.log("weatherData", weatherData);
 
     // Set city and region
-    const region = IPData.region;
+    const region = IPData.region_code;
     const city = IPData.city;
 
     // Used a refresher
@@ -269,13 +269,14 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
                 currentWeatherIcon,
                 twentyFourHourTempSlice[i],
             ]);
+        } else {
+            // Do the rest of the 23 hours
+            hourlyTimeAndTemp.push([
+                twentyFourHourTimeSlice[i],
+                hourlyWeatherIcons[i],
+                twentyFourHourTempSlice[i],
+            ]);
         }
-        // Do the rest of the 23 hours
-        hourlyTimeAndTemp.push([
-            twentyFourHourTimeSlice[i],
-            hourlyWeatherIcons[i],
-            twentyFourHourTempSlice[i],
-        ]);
     }
 
     // Array used to print values to 10-day forecast
@@ -413,8 +414,8 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
                 <div className="data_sources_container">
                     <div className="source_container">
                         Location data provided by
-                        <a target="_blank" href="https://ip-api.com/">
-                            ip-api
+                        <a target="_blank" href="https://ipwhois.io/">
+                            IPWHOIS.IO
                         </a>
                     </div>
                     <div className="source_container">
