@@ -23,13 +23,13 @@ ChartJS.register(
 const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
     let hourlyPrecipitationData =
         weatherData.hourly.precipitation_probability.slice(hour, hour + 25);
-    // hourlyPrecipitationData = [10, 3, 15, 52, 42, 0, 2, 0];
+    //hourlyPrecipitationData = [10, 3, 15, 52, 42, 0, 2, 0];
     // Precipitation bar graph data
     const data = {
-        labels: twentyFourHourTimeSlice,
+        labels: twentyFourHourTimeSlice.slice(0, 12),
         datasets: [
             {
-                data: hourlyPrecipitationData,
+                data: hourlyPrecipitationData.slice(0, 12),
                 backgroundColor: "rgba(255, 255, 255, 0.2)",
                 borderWidth: 0,
                 borderColor: "rgba(255, 255, 255, 0.4)",
@@ -40,8 +40,11 @@ const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
         ],
     };
 
+    const maxOfArray = Math.max.apply(Math, hourlyPrecipitationData);
+
     const config = {
-        maintainAspectRatio: false,
+        // responsive: true,
+        maintainAspectRatio: false /* was true for shrinkable css*/,
         plugins: {
             legend: {
                 display: false,
@@ -51,14 +54,23 @@ const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
                 align: "top",
                 color: "rgb(255, 255, 255, 1)",
                 formatter: function (value) {
-                    return value + "%";
+                    if (maxOfArray === 0) return "";
+                    else if (value === maxOfArray) {
+                        console.log(`${value} === ${maxOfArray}`);
+                        return value + "%";
+                    } else {
+                        return "";
+                    }
                 },
             },
         },
-
         scales: {
             x: {
-                grid: { display: false, drawOnChartArea: false },
+                border: { color: "rgb(255, 255, 255, 0.2" },
+                grid: {
+                    drawOnChartArea: false,
+                    color: "rgb(255, 255, 255, 0.2",
+                },
                 ticks: { color: "#fff" },
             },
             y: {

@@ -347,6 +347,66 @@ html {
     width: 3rem;
     height: 3rem;
 }
+/* graph ****************/
+
+.prec_graph_container {
+    width: 100%;
+}
+
+.prec_graph_bg {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+
+    display: flex;
+    justify-content: center;
+}
+
+.prec_graph_title {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.graph_container {
+    width: 620px;
+    height: 200px;
+    padding-bottom: 1.5rem;
+}
+
+.graph_container_body {
+    height: 100%;
+}
+
+@media only screen and (max-width: 700px) {
+    .graph_container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 1880px) {
+    /* fix padding on hourly forecast temp in mobile mode */
+    .hourly_forecast_data_cell:last-child {
+        padding-right: 0.5rem;
+    }
+}
+
+@media screen and (min-width: 450px) {
+    ::-webkit-scrollbar {
+        width: 14px;
+        height: 35px;
+        position: absolute;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border: 15px solid rgba(0, 0, 0, 0);
+        background-clip: padding-box;
+        border-radius: 9999px;
+        background-color: rgba(255, 255, 255, 0.25);
+    }
+}
+
+/* SCROLLABLE DESKTOP ONLY
 
 .prec_graph_container {
     width: 100%;
@@ -376,31 +436,43 @@ html {
     height: 8rem;
     width: 1500px;
 }
+*/
 
-@media screen and (max-width: 1880px) {
-    /* fix padding on hourly forecast temp in mobile mode */
-    .hourly_forecast_data_cell:last-child {
-        padding-right: 0.5rem;
-    }
+/********************************************/
+
+/*  SHRINKABLE NON-SCROLLABLE
+.prec_graph_container {
+    width: 100%;
 }
 
-@media screen and (max-width: 700px) {
-    .prec_graph_container {
-        display: none;
-    }
+.prec_graph_bg {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+
+    display: flex;
+    justify-content: center;
 }
 
-@media screen and (min-width: 450px) {
-    ::-webkit-scrollbar {
-        width: 14px;
-        height: 35px;
-        position: absolute;
-    }
+.prec_graph_title {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
 
-    ::-webkit-scrollbar-thumb {
-        border: 15px solid rgba(0, 0, 0, 0);
-        background-clip: padding-box;
-        border-radius: 9999px;
-        background-color: rgba(255, 255, 255, 0.25);
+.graph_container {
+    width: 620px;
+    height: 350px;
+}
+
+.graph_container_body {
+    height: 100%;
+}
+
+@media only screen and (max-width: 700px) {
+    .graph_container {
+        width: 90%;
+        height: 45%;
     }
 }
+*/
