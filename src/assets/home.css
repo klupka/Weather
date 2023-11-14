@@ -119,8 +119,8 @@ html {
 }
 
 .data_sources_container {
-    margin-top: 1em;
-    margin-bottom: 1rem;
+    margin-top: 5em;
+    margin-bottom: 2rem;
 }
 
 .source_container {
@@ -367,13 +367,13 @@ html {
 
 .graph_container {
     width: 1500px;
-    max-width: 620px;
+    max-width: 645px;
     overflow-x: scroll;
-    padding: 1.5rem;
+    margin: 1.5rem;
 }
 
 .graph_container_body {
-    height: 10rem;
+    height: 8rem;
     width: 1500px;
 }
 

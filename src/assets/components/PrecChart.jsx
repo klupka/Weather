@@ -9,23 +9,33 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
-
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Bar } from "react-chartjs-2";
-ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+ChartJS.register(
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    Tooltip,
+    Legend,
+    ChartDataLabels
+);
 
 const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
     let hourlyPrecipitationData =
         weatherData.hourly.precipitation_probability.slice(hour, hour + 25);
-
+    // hourlyPrecipitationData = [10, 3, 15, 52, 42, 0, 2, 0];
     // Precipitation bar graph data
     const data = {
         labels: twentyFourHourTimeSlice,
         datasets: [
             {
-                data: hourlyPrecipitationData /* [0, 0, 2, 23, 54, 56, 31, 4, 0] */,
-                backgroundColor: "white",
-                borderWidth: 1,
-                borderRadius: 5,
+                data: hourlyPrecipitationData,
+                backgroundColor: "rgba(255, 255, 255, 0.2)",
+                borderWidth: 0,
+                borderColor: "rgba(255, 255, 255, 0.4)",
+                borderRadius: 3,
+                borderSkipped: false,
+                fill: false,
             },
         ],
     };
@@ -36,17 +46,32 @@ const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
             legend: {
                 display: false,
             },
-        },
-        scales: {
-            x: {
-                ticks: {
-                    color: "#fff",
+            datalabels: {
+                anchor: "end",
+                align: "top",
+                color: "rgb(255, 255, 255, 1)",
+                formatter: function (value) {
+                    return value + "%";
                 },
             },
+        },
+
+        scales: {
+            x: {
+                grid: { display: false, drawOnChartArea: false },
+                ticks: { color: "#fff" },
+            },
             y: {
+                display: false,
+                grid: {
+                    lineWidth: 1,
+                    color: "",
+                    drawTicks: false,
+                },
                 min: 0,
                 max: 100,
                 ticks: {
+                    display: false,
                     stepSize: 50,
                     color: "#fff",
                     callback: (value, index, values) => {
