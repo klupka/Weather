@@ -2,6 +2,7 @@
 import "../home.css";
 // JSX Imports
 import * as icons from "../icons/Icons";
+import PrecChart from "./PrecChart";
 // Other Imports
 import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -407,6 +408,17 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
                                 {currentHumidity}%
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div className="prec_graph_container">
+                    <div className="prec_graph_title">Precipitation</div>
+                    <div className="prec_graph_bg">
+                        <PrecChart
+                            hour={hour}
+                            twentyFourHourTimeSlice={twentyFourHourTimeSlice}
+                            weatherData={weatherData}
+                        />
                     </div>
                 </div>
 

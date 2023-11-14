@@ -286,7 +286,6 @@ html {
     display: none;
 }
 
-/* //// */
 .current_conditions_container {
     width: 100%;
     max-width: 700px;
@@ -349,12 +348,45 @@ html {
     height: 3rem;
 }
 
-/* STOP */
+.prec_graph_container {
+    width: 100%;
+    max-width: 700px;
+}
+
+.prec_graph_bg {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.prec_graph_title {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.graph_container {
+    width: 1500px;
+    max-width: 620px;
+    overflow-x: scroll;
+    padding: 1.5rem;
+}
+
+.graph_container_body {
+    height: 10rem;
+    width: 1500px;
+}
 
 @media screen and (max-width: 1880px) {
     /* fix padding on hourly forecast temp in mobile mode */
     .hourly_forecast_data_cell:last-child {
         padding-right: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .prec_graph_container {
+        display: none;
     }
 }
 
