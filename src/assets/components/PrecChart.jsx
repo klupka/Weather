@@ -1,6 +1,4 @@
-// CSS Imports
 import "../home.css";
-
 import {
     Chart as ChartJS,
     BarElement,
@@ -23,8 +21,7 @@ ChartJS.register(
 const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
     let hourlyPrecipitationData =
         weatherData.hourly.precipitation_probability.slice(hour, hour + 25);
-    //hourlyPrecipitationData = [10, 3, 15, 52, 42, 0, 2, 0];
-    // Precipitation bar graph data
+
     const data = {
         labels: twentyFourHourTimeSlice.slice(0, 12),
         datasets: [
@@ -43,8 +40,7 @@ const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
     const maxOfArray = Math.max.apply(Math, hourlyPrecipitationData);
 
     const config = {
-        // responsive: true,
-        maintainAspectRatio: false /* was true for shrinkable css*/,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 display: false,
@@ -54,13 +50,7 @@ const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
                 align: "top",
                 color: "rgb(255, 255, 255, 1)",
                 formatter: function (value) {
-                    if (maxOfArray === 0) return "";
-                    else if (value === maxOfArray) {
-                        console.log(`${value} === ${maxOfArray}`);
-                        return value + "%";
-                    } else {
-                        return "";
-                    }
+                    return value + "%";
                 },
             },
         },
@@ -94,10 +84,8 @@ const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
         },
     };
 
-    const handleWheel = (event) => {};
-
     return (
-        <div className="graph_container" onWheel={handleWheel}>
+        <div className="graph_container">
             <div className="graph_container_body">
                 <Bar data={data} options={config} />
             </div>

@@ -3,7 +3,7 @@
 } */
 
 @font-face {
-    font-family: "Onest"; /*Can be any text*/
+    font-family: "Onest";
     src: url("./fonts/Onest-VariableFont_wght.ttf");
     font-weight: 400;
 }
@@ -25,7 +25,6 @@ html {
 }
 
 .flex_item {
-    /* padding from top of screen */
     padding-top: 4rem;
     display: flex;
     flex-direction: column;
@@ -40,7 +39,6 @@ html {
     font-size: 5rem;
     display: flex;
     justify-content: center;
-    /* center temp */
     margin-left: 1.5rem;
     margin-bottom: 0rem;
 }
@@ -88,7 +86,6 @@ html {
 }
 
 .refresh_button_container button {
-    /* was refresh_button_container button */
     background-color: transparent;
     border: none;
     color: white;
@@ -96,12 +93,8 @@ html {
     cursor: pointer;
     width: 2.2rem;
     height: 2.2rem;
-
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50px;
-    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */ /* Not sure if i like it? maybe.. */
-    /* backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px); */
     border: 2px solid rgba(255, 255, 255, 0.1);
 
     transition-duration: 1.3s;
@@ -139,13 +132,11 @@ html {
 }
 
 .hourly_forecast_container {
-    /* empty, unused */
     width: 100%;
     max-width: 700px;
 }
 
 .hourly_forecast_title {
-    /* font-weight: 600; */
     font-size: 1rem;
     margin-bottom: 1rem;
     margin-top: 1rem;
@@ -154,8 +145,6 @@ html {
 .hourly_forecast_bg {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
-    /* backdrop-filter: blur(8px); */
-    /* -webkit-backdrop-filter: blur(8px); */
     border: 2px solid rgba(255, 255, 255, 0.1);
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -165,8 +154,6 @@ html {
     overflow-y: hidden;
     white-space: nowrap;
     max-width: 85vw;
-    /* hide scrollbar
-    overflow-x: hidden; */
 }
 
 .hourly_forecast_data_container {
@@ -197,35 +184,28 @@ html {
     font-size: 1.2rem;
 }
 
-/* START */
-
 .ten_day_forecast_container {
     width: 100%;
     max-width: 700px;
 }
 
 .ten_day_forecast_title {
-    /* font-weight: 600; */
     font-size: 1rem;
     margin-bottom: 1rem;
     margin-top: 1rem;
 }
 
 .ten_day_forecast_bg {
-    /* border: 3px solid red; */
     display: flex;
     flex-direction: column;
 
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
-    /* backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px); */
     border: 2px solid rgba(255, 255, 255, 0.1);
     padding: 0.5rem;
 }
 
 .ten_day_forecast_rows {
-    /* border: 3px solid blue; */
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 0.5rem;
@@ -347,7 +327,6 @@ html {
     width: 3rem;
     height: 3rem;
 }
-/* graph ****************/
 
 .prec_graph_container {
     width: 100%;
@@ -405,74 +384,3 @@ html {
         background-color: rgba(255, 255, 255, 0.25);
     }
 }
-
-/* SCROLLABLE DESKTOP ONLY
-
-.prec_graph_container {
-    width: 100%;
-    max-width: 700px;
-}
-
-.prec_graph_bg {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.prec_graph_title {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-}
-
-.graph_container {
-    width: 1500px;
-    max-width: 645px;
-    overflow-x: scroll;
-    margin: 1.5rem;
-}
-
-.graph_container_body {
-    height: 8rem;
-    width: 1500px;
-}
-*/
-
-/********************************************/
-
-/*  SHRINKABLE NON-SCROLLABLE
-.prec_graph_container {
-    width: 100%;
-}
-
-.prec_graph_bg {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-
-    display: flex;
-    justify-content: center;
-}
-
-.prec_graph_title {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-}
-
-.graph_container {
-    width: 620px;
-    height: 350px;
-}
-
-.graph_container_body {
-    height: 100%;
-}
-
-@media only screen and (max-width: 700px) {
-    .graph_container {
-        width: 90%;
-        height: 45%;
-    }
-}
-*/

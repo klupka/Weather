@@ -1,9 +1,6 @@
-// CSS Imports
 import "../home.css";
-// JSX Imports
 import * as icons from "../icons/Icons";
 import PrecChart from "./PrecChart";
-// Other Imports
 import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,9 +9,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
-    console.log("IPData", IPData);
-    console.log("weatherData", weatherData);
-
     // Set city and region
     const region = IPData.region_code;
     const city = IPData.city;
