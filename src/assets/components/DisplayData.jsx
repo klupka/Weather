@@ -1,17 +1,57 @@
 import "../home.css";
 import * as icons from "../icons/Icons";
 import PrecChart from "./PrecChart";
-import React, { useState, useRef } from "react";
+import Search from "./Search";
+import DisplaySearchResults from "./DisplaySearchResults";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLocationDot,
     faArrowsRotate,
+    faMagnifyingGlass,
+    faXmark,
+    faLocationCrosshairs,
 } from "@fortawesome/free-solid-svg-icons";
 
-const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
+const DisplayData = ({
+    setIPData,
+    IPData,
+    setWeatherData,
+    weatherData,
+    setSearchResults,
+    searchResults,
+}) => {
+    const [clearInput, setClearInput] = useState("");
+    // console.log("weatherData", weatherData);
+    // console.log("IPData", IPData);
+
+    // If day:
+    if (weatherData.current.is_day === 1) {
+        console.log("day detected");
+        document.documentElement.style.backgroundColor = "#3a7aba";
+        document.documentElement.style.background =
+            "linear-gradient(#6bb7ff, #3a7aba)";
+        document.documentElement.style.backgroundAttachment = "fixed";
+    }
+    // If night:
+    if (weatherData.current.is_day === 0) {
+        console.log("night detected");
+        document.documentElement.style.backgroundColor = "#3a7aba";
+        document.documentElement.style.background =
+            "linear-gradient(#04051a, #2d4265)";
+        document.documentElement.style.backgroundAttachment = "fixed";
+    }
+
     // Set city and region
     const region = IPData.region_code;
     const city = IPData.city;
+    // const cityRegionStr = "";
+    // if (region === undefined) {
+    //     console.log("region undefined");
+    //     cityRegionStr = city;
+    // } else {
+    //     cityRegionStr = `${city}, ${region}`;
+    // }
 
     // Used a refresher
     const [counter, setCounter] = useState(0);
@@ -39,11 +79,8 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
 
     // Combine city and region into one string
     let cityRegionStr = city + ", " + region;
+    if (region === undefined) cityRegionStr = city;
     //cityRegionStr = cityRegionStr.toUpperCase();
-
-    // Dynamic CSS Imports
-    if (weatherData.current.is_day === 1) import("../day.css");
-    if (weatherData.current.is_day === 0) import("../night.css");
 
     // Set current temperature
     const currentTemperature = Math.round(weatherData.current.temperature_2m);
@@ -174,23 +211,22 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
     // WMO code table. I tried using switch, but this is the only way it worked.
     function checkWMOCodes(code) {
         let descStr;
-        if (code === 0) descStr = "clear_sky";
+        if (code === 0) descStr = "Clear";
         else if (code === 1 || code === 2 || code === 3)
-            descStr = "partly_cloudy";
-        else if (code === 45 || code === 48) descStr = "fog";
-        else if (code === 51 || code === 53 || code === 55) descStr = "drizzle";
-        else if (code === 56 || code === 57) descStr = "freezing_drizzle";
-        else if (code === 61 || code === 63 || code === 65) descStr = "rain";
-        else if (code === 66 || code === 67) descStr = "freezing_rain";
-        else if (code === 71 || code === 73 || code === 75)
-            descStr = "snow_fall";
-        else if (code === 77) descStr = "snow_grains";
+            descStr = "Partly Cloudy";
+        else if (code === 45 || code === 48) descStr = "Foggy";
+        else if (code === 51 || code === 53 || code === 55) descStr = "Drizzle";
+        else if (code === 56 || code === 57) descStr = "Freezing Drizzle";
+        else if (code === 61 || code === 63 || code === 65) descStr = "Rain";
+        else if (code === 66 || code === 67) descStr = "Freezing Rain";
+        else if (code === 71 || code === 73 || code === 75) descStr = "Snow";
+        else if (code === 77) descStr = "Snow Grains";
         else if (code === 80 || code === 81 || code === 82)
-            descStr = "rain_showers";
-        else if (code === 85 || code === 86) descStr = "snow_showers";
-        else if (code === 95) descStr = "thunderstorm";
-        else if (code === 96 || code === 99) descStr = "hail_thunderstorm";
-        else descStr = "clear_sky";
+            descStr = "Rain Showers";
+        else if (code === 85 || code === 86) descStr = "Snow Showers";
+        else if (code === 95) descStr = "Thunderstorm";
+        else if (code === 96 || code === 99) descStr = "Hail Thunderstorm";
+        else descStr = "Clear";
 
         return descStr;
     }
@@ -199,46 +235,46 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
     function weatherDescToIco(weatherCodeDesc) {
         let weatherIcon;
         switch (weatherCodeDesc) {
-            case "clear_sky":
+            case "Clear":
                 if (weatherData.current.is_day === 1) weatherIcon = icons.sun;
                 else weatherIcon = icons.moon;
                 break;
-            case "partly_cloudy":
+            case "Partly Cloudy":
                 if (weatherData.current.is_day === 1)
                     weatherIcon = icons.cloudy_sun;
                 else weatherIcon = icons.cloudy_moon;
                 break;
-            case "fog":
+            case "Foggy":
                 weatherIcon = icons.fog;
                 break;
-            case "drizzle":
+            case "Drizzle":
                 weatherIcon = icons.drizzle;
                 break;
-            case "freezing_drizzle":
+            case "Freezing Drizzle":
                 weatherIcon = icons.freezing_drizzle;
                 break;
-            case "rain":
+            case "Rain":
                 weatherIcon = icons.rain;
                 break;
-            case "freezing_rain":
+            case "Freezing Rain":
                 weatherIcon = icons.rain;
                 break;
-            case "snow_fall":
+            case "Snow":
                 weatherIcon = icons.snow;
                 break;
-            case "snow_grains":
+            case "Snow Grains":
                 weatherIcon = icons.snow;
                 break;
-            case "rain_showers":
+            case "Rain Showers":
                 weatherIcon = icons.rain;
                 break;
-            case "snow_showers":
+            case "Snow Showers":
                 weatherIcon = icons.snow;
                 break;
-            case "thunderstorm":
+            case "Thunderstorm":
                 weatherIcon = icons.thunder_cloud;
                 break;
-            case "hail_thunderstorm":
+            case "Hail Thunderstorm":
                 weatherIcon = icons.thunder_cloud;
                 break;
             default:
@@ -289,150 +325,258 @@ const DisplayData = ({ setIPData, IPData, setWeatherData, weatherData }) => {
     let currentHumidity = weatherData.current.relative_humidity_2m;
     let currentWindSpeed = weatherData.current.wind_speed_10m;
 
+    const openSearch = () => {
+        document.querySelector("html").style.overflow = "hidden";
+        document.getElementById("search_container").style.display = "flex";
+        document.getElementById("search_container").style.animation =
+            "fadeIn 0.25s ease-in-out";
+        document.getElementById("search_flex_item").style.animation =
+            "lift 0.25s cubic-bezier(1, 0, 0, 1.0)";
+
+        document.getElementById("search_input_form").focus();
+    };
+
+    const closeSearch = () => {
+        document.getElementById("search_container").style.animation =
+            "fadeOut 0.25s ease-in-out";
+        document.getElementById("search_flex_item").style.animation =
+            "fall 0.25s ease-in-out";
+
+        setTimeout(function () {
+            document.querySelector("html").style.overflow = "visible";
+            document.getElementById("search_container").style.display = "none";
+            setClearInput(searchResults); // using searchResults as dummy value to trigger useEffect.
+            setSearchResults([]);
+        }, 150);
+    };
+
+    const tenDayForecastMap = tenDayForecastMasterArray.map((item, index) => {
+        // For last item in map, don't create a hr element.
+        if (tenDayForecastMasterArray.length - 1 === index) {
+            return (
+                <div className="TDF_key_container" key={index}>
+                    <div className="ten_day_forecast_rows">
+                        <div className="ten_day_forecast_column_day">
+                            {item[0]}
+                        </div>
+                        <div className="ten_day_forecast_column_icon">
+                            {item[1]}
+                        </div>
+                        <div className="ten_day_forecast_column_high">
+                            {item[2]}
+                        </div>
+                        <div className="ten_day_forecast_column_low">
+                            {item[3]}
+                        </div>
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div className="TDF_key_container" key={index}>
+                    <div className="ten_day_forecast_rows">
+                        <div className="ten_day_forecast_column_day">
+                            {item[0]}
+                        </div>
+                        <div className="ten_day_forecast_column_icon">
+                            {item[1]}
+                        </div>
+                        <div className="ten_day_forecast_column_high">
+                            {item[2]}
+                        </div>
+                        <div className="ten_day_forecast_column_low">
+                            {item[3]}
+                        </div>
+                    </div>
+                    <hr className="TDF_hr"></hr>
+                </div>
+            );
+        }
+    });
+
     return (
-        <div className="flex_container">
-            <div className="flex_item">
-                <div className="location_container">
-                    <div className="location_icon">
-                        <FontAwesomeIcon icon={faLocationDot} />
-                    </div>
-                    <div className="location_text">{cityRegionStr}</div>
-                    {/* <button
-                        className="refresh_button"
-                        onClick={() => {
-                            setIPData([]);
-                            setWeatherData([]);
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faArrowsRotate} />
-                    </button> */}
-                </div>
-                <div className="current_temperature_container">
-                    {currentTemperature}°
-                </div>
-                <div className="current_weather_code">{currentWeatherIcon}</div>
-                <div className="high_low_container">
-                    <span className="high_low_container_high">{high}°</span>{" "}
-                    <span className="high_low_container_low">{low}°</span>
-                </div>
-                <div className="feels_like_container">
-                    Feels like {currentFeelsLike}°
-                </div>
-
-                <div className="refresh_button_container">
-                    <button
-                        onClick={() => {
-                            setIPData([]);
-                            setWeatherData([]);
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faArrowsRotate} />
-                    </button>
-                </div>
-
-                <div className="hourly_forecast_container">
-                    <div className="hourly_forecast_title">Hourly forecast</div>
-                    <div className="hourly_forecast_bg">
-                        <div className="hourly_forecast_data_container">
-                            {hourlyTimeAndTemp.map((item, index) => (
-                                <div
-                                    key={index}
-                                    className="hourly_forecast_data_cell"
-                                >
-                                    <div className="hourly_forecast_time_and_temp hourly_time">
-                                        {item[0]}
-                                    </div>
-                                    <div className="hourly_forecast_time_and_temp hourly_icon">
-                                        {item[1]}
-                                    </div>
-                                    <div className="hourly_forecast_time_and_temp hourly_temp">
-                                        {item[2]}
-                                    </div>
-                                </div>
-                            ))}
+        <>
+            <div id="search_container" className="search_bg">
+                <div className="search_container">
+                    <div className="search_flex_item" id="search_flex_item">
+                        <div className="btn_close_container">
+                            <button
+                                id="btn_close_search"
+                                className="btn_designed"
+                                onClick={closeSearch}
+                            >
+                                <FontAwesomeIcon icon={faXmark} />
+                            </button>
                         </div>
-                    </div>
-                </div>
-
-                <div className="ten_day_forecast_container">
-                    <div className="ten_day_forecast_title">
-                        10-day forecast
-                    </div>
-                    <div className="ten_day_forecast_bg">
-                        {tenDayForecastMasterArray.map((item, index) => {
-                            return [
-                                <div className="ten_day_forecast_rows">
-                                    <div className="ten_day_forecast_column_day">
-                                        {item[0]}
-                                    </div>
-                                    <div className="ten_day_forecast_column_icon">
-                                        {item[1]}
-                                    </div>
-                                    <div className="ten_day_forecast_column_high">
-                                        {item[2]}
-                                    </div>
-                                    <div className="ten_day_forecast_column_low">
-                                        {item[3]}
-                                    </div>
-                                </div>,
-                                <hr className="ten_day_forecast_hr" />,
-                            ];
-                        })}
-                    </div>
-                </div>
-
-                <div className="current_conditions_container">
-                    <div className="current_conditions_title">
-                        Current Conditions
-                    </div>
-                    <div className="current_conditions_columns">
-                        <div className="current_conditions_wind_container">
-                            <div className="CC_wind_title">Wind</div>
-                            <div className="CC_wind_icon">{icons.wind}</div>
-                            <div className="CC_wind_data">
-                                {currentWindSpeed} mph
-                            </div>
+                        <div className="search_forms">
+                            <Search
+                                searchResults={searchResults}
+                                setSearchResults={setSearchResults}
+                                clearInput={clearInput}
+                            />
                         </div>
-                        <div className="current_conditions_humidity_container">
-                            <div className="CC_humidity_title">Humidity</div>
-                            <div className="CC_humidity_icon">
-                                {icons.humidity}
-                            </div>
-                            <div className="CC_humidity_data">
-                                {currentHumidity}%
-                            </div>
+                        <div>
+                            <DisplaySearchResults
+                                searchResults={searchResults}
+                                setIPData={setIPData}
+                                setWeatherData={setWeatherData}
+                            />
                         </div>
-                    </div>
-                </div>
-
-                <div className="prec_graph_container">
-                    <div className="prec_graph_title">Precipitation</div>
-                    <div className="prec_graph_bg">
-                        <PrecChart
-                            hour={hour}
-                            twentyFourHourTimeSlice={twentyFourHourTimeSlice}
-                            weatherData={weatherData}
-                        />
-                    </div>
-                </div>
-
-                {/* BOTTOM */}
-                <div className="data_sources_container">
-                    <div className="source_container">
-                        Location data provided by
-                        <a target="_blank" href="https://ipwhois.io/">
-                            IPWHOIS.IO
-                        </a>
-                    </div>
-                    <div className="source_container">
-                        Weather data provided by
-                        <a target="_blank" href="https://open-meteo.com/">
-                            Open-Meteo
-                        </a>
                     </div>
                 </div>
             </div>
-        </div>
+            <div id="flex_container" className="flex_container">
+                <div className="flex_item">
+                    <div className="buttons_container">
+                        <button className="btn_designed">
+                            <FontAwesomeIcon
+                                onClick={() => {
+                                    setIPData([]);
+                                    setWeatherData([]);
+                                }}
+                                icon={faLocationCrosshairs}
+                            />
+                        </button>
+                        <button className="btn_designed" onClick={openSearch}>
+                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <span className="btn_open_search_text">Search</span>
+                        </button>
+                    </div>
+                    <div className="location_container">
+                        <div className="location_icon">
+                            <FontAwesomeIcon icon={faLocationDot} />
+                        </div>
+                        <div className="location_text">{cityRegionStr}</div>
+                    </div>
+                    <div className="current_temperature_container">
+                        {currentTemperature}°
+                    </div>
+                    <div className="current_weather_code">
+                        {currentWeatherIcon}
+                    </div>
+                    <div className="current_weather_desc">
+                        {currentWeatherDesc}
+                    </div>
+                    <div className="high_low_container">
+                        <span className="high_low_container_high">{high}°</span>{" "}
+                        <span className="high_low_container_low">{low}°</span>
+                    </div>
+                    <div className="feels_like_container">
+                        Feels like {currentFeelsLike}°
+                    </div>
+
+                    <div className="hourly_forecast_container">
+                        <div className="hourly_forecast_title">
+                            Hourly forecast
+                        </div>
+                        <div className="hourly_forecast_bg">
+                            <div className="hourly_forecast_data_container">
+                                {hourlyTimeAndTemp.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className="hourly_forecast_data_cell"
+                                    >
+                                        <div className="hourly_forecast_time_and_temp hourly_time">
+                                            {item[0]}
+                                        </div>
+                                        <div className="hourly_forecast_time_and_temp hourly_icon">
+                                            {item[1]}
+                                        </div>
+                                        <div className="hourly_forecast_time_and_temp hourly_temp">
+                                            {item[2]}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="ten_day_forecast_container">
+                        <div className="ten_day_forecast_title">
+                            10-day forecast
+                        </div>
+                        <div className="ten_day_forecast_bg">
+                            {/* key prop error here */}
+                            {/* {tenDayForecastMasterArray.map((item, index) => {
+                                return [
+                                    <div className="ten_day_forecast_rows">
+                                        <div className="ten_day_forecast_column_day">
+                                            {item[0]}
+                                        </div>
+                                        <div className="ten_day_forecast_column_icon">
+                                            {item[1]}
+                                        </div>
+                                        <div className="ten_day_forecast_column_high">
+                                            {item[2]}
+                                        </div>
+                                        <div className="ten_day_forecast_column_low">
+                                            {item[3]}
+                                        </div>
+                                    </div>,
+                                    <hr className="ten_day_forecast_hr" />,
+                                ];
+                            })} */}
+                            {tenDayForecastMap}
+                        </div>
+                    </div>
+
+                    <div className="current_conditions_container">
+                        <div className="current_conditions_title">
+                            Current Conditions
+                        </div>
+                        <div className="current_conditions_columns">
+                            <div className="current_conditions_wind_container">
+                                <div className="CC_wind_title">Wind</div>
+                                <div className="CC_wind_icon">{icons.wind}</div>
+                                <div className="CC_wind_data">
+                                    {currentWindSpeed} mph
+                                </div>
+                            </div>
+                            <div className="current_conditions_humidity_container">
+                                <div className="CC_humidity_title">
+                                    Humidity
+                                </div>
+                                <div className="CC_humidity_icon">
+                                    {icons.humidity}
+                                </div>
+                                <div className="CC_humidity_data">
+                                    {currentHumidity}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="prec_graph_container">
+                        <div className="prec_graph_title">Precipitation</div>
+                        <div className="prec_graph_bg">
+                            <PrecChart
+                                hour={hour}
+                                twentyFourHourTimeSlice={
+                                    twentyFourHourTimeSlice
+                                }
+                                weatherData={weatherData}
+                            />
+                        </div>
+                    </div>
+
+                    {/* BOTTOM */}
+                    <div className="data_sources_container">
+                        <div className="source_container">
+                            Location data provided by
+                            <a target="_blank" href="https://ipwhois.io/">
+                                IPWHOIS.IO
+                            </a>
+                        </div>
+                        <div className="source_container">
+                            Weather data provided by
+                            <a target="_blank" href="https://open-meteo.com/">
+                                Open-Meteo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 };
 

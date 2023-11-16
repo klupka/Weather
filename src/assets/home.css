@@ -16,16 +16,251 @@
 
 html {
     color: white;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
+    overflow: visible;
 }
 
-.flex_container {
+*::-webkit-scrollbar:vertical {
+    display: none;
+}
+
+.btn_designed svg {
+    display: block;
+}
+
+.btn_close_container {
+    width: 100%;
+
+    display: flex;
+    justify-content: right;
+}
+
+.buttons_container {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+    gap: 0.8rem;
+}
+
+.btn_open_search_text {
+    color: rgb(255, 255, 255, 0.8);
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    display: none;
+}
+
+.btn_designed {
+    all: unset;
+    display: flex;
+    background-color: rgb(0, 0, 0, 0);
+    padding: 0;
+    margin: 0;
+    border-radius: 500px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    padding: 0.5rem;
+    color: white;
+    font-size: 1rem;
+    transition-duration: 0.1s;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn_designed:hover {
+    background-color: white;
+    color: black;
+}
+
+@keyframes lift {
+    0% {
+        transform: translateY(10rem);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0rem);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(10rem);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInBlur {
+    0% {
+        opacity: 0;
+        filter: blur(60px);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes fadeOutBlur {
+    0% {
+        filter: blur(0px);
+        opacity: 1;
+    }
+    100% {
+        filter: blur(60px);
+        opacity: 0;
+    }
+}
+
+@keyframes flexContainerFadeOutBlur {
+    0% {
+        filter: blur(60px);
+        opacity: 1;
+    }
+    100% {
+        filter: blur(60px);
+        opacity: 0;
+    }
+}
+
+.search_forms {
+    display: flex;
+    margin-top: 10%;
+}
+
+/* remove unnecessary padding around icon */
+.search_bg svg {
+    display: block;
+}
+
+.flex_container svg {
+    display: block;
+}
+
+.btn_search {
+    all: unset;
+    border-radius: 0px 10px 10px 0px;
+    background: rgba(255, 255, 255, 0.1);
+    border-style: solid;
+    border-width: 2px 2px 2px 0px;
+    border-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.form_search {
+    display: flex;
+}
+
+.btn_close_search {
+    all: unset;
+    padding: 1rem;
+    height: 1rem;
+}
+
+.search_results_container {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.1);
+    margin-top: 5rem;
+    padding: 1rem;
+}
+
+.search_results_container_empty {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    animation: fadeIn 1s ease-out;
+}
+
+.search_results_item {
+    all: unset;
+    width: 100%;
+    display: block;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    cursor: pointer;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    width: 20rem;
+    font-size: 0.9rem;
+    transition-duration: 0.1s;
+}
+
+.search_results_item:hover {
+    background: rgba(255, 255, 255, 1);
+    color: black;
+}
+
+.search_results_text {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input_search {
+    all: unset;
+    border-radius: 10px 0px 0px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-style: solid;
+    border-width: 2px 0px 2px 2px;
+    border-color: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    width: 15rem;
+    height: 1rem;
+}
+
+.search_forms input::placeholder {
+    color: rgb(225, 255, 255, 0.5);
+}
+
+.search_bg {
+    backdrop-filter: blur(60px);
+    background-color: rgb(0, 0, 0, 0.15);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow: none;
+    display: none;
+}
+
+.search_container {
+    width: 100%;
+    height: 100%;
+    padding-top: 1rem;
     display: flex;
     justify-content: center;
 }
 
-.flex_item {
-    padding-top: 4rem;
+.search_flex_item {
     display: flex;
     flex-direction: column;
 
@@ -33,6 +268,32 @@ html {
     padding-right: 1rem;
 
     align-items: center;
+    width: 700px;
+    max-width: 700px;
+}
+
+.flex_container {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+    /*animation: fadeInBlur 1s ease-out;*/
+}
+
+.flex_container * {
+    animation: fadeInBlur 2.5s ease-out;
+    /* filter: blur(10px); */
+}
+
+.flex_item {
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    align-items: center;
+    width: 700px;
+    max-width: 700px;
 }
 
 .current_temperature_container {
@@ -43,12 +304,17 @@ html {
     margin-bottom: 0rem;
 }
 
+.current_weather_desc {
+    margin-bottom: 1rem;
+}
+
 .location_container {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
     margin-bottom: 1rem;
+    margin-top: 2rem;
 }
 
 .location_icon {
@@ -253,17 +519,13 @@ html {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.ten_day_forecast_hr {
+.TDF_hr {
     margin-left: 1rem;
     margin-right: 1rem;
     height: 2px;
     border: none;
 
     background-color: rgba(255, 255, 255, 0.103);
-}
-
-.ten_day_forecast_hr:last-child {
-    display: none;
 }
 
 .current_conditions_container {
@@ -351,6 +613,7 @@ html {
     width: 620px;
     height: 200px;
     padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
 }
 
 .graph_container_body {

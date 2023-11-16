@@ -52,6 +52,9 @@ const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
                 formatter: function (value) {
                     return value + "%";
                 },
+                font: {
+                    size: 9,
+                },
             },
         },
         scales: {
@@ -71,7 +74,7 @@ const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
                     drawTicks: false,
                 },
                 min: 0,
-                max: 100,
+                max: 120,
                 ticks: {
                     display: false,
                     stepSize: 50,
