@@ -19,14 +19,16 @@ const DisplaySearchResults = ({
         };
 
         document.getElementById("search_container").style.animation =
-            "fadeOutBlur 2.5s ease-in-out";
+            "fadeOutBlur 1s ease-out";
         document.getElementById("flex_container").style.animation =
-            "flexContainerFadeOutBlur 2.5s ease-in-out";
+            "flexContainerFadeOutBlur 1s ease-out";
+        // document.getElementById("search_bg").style.animation =
+        //     "fadeOut 1s ease-out";
         setTimeout(function () {
             console.log(newIPData);
             setIPData(newIPData);
             setWeatherData([]);
-        }, 2400);
+        }, 900);
     };
 
     if (searchResults.length > 0) {

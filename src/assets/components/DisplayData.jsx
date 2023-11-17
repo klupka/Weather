@@ -431,8 +431,14 @@ const DisplayData = ({
                         <button className="btn_designed">
                             <FontAwesomeIcon
                                 onClick={() => {
-                                    setIPData([]);
-                                    setWeatherData([]);
+                                    document.getElementById(
+                                        "flex_container"
+                                    ).style.animation =
+                                        "flexContainerFadeOutBlurFromZero 1s ease-out";
+                                    setTimeout(function () {
+                                        setIPData([]);
+                                        setWeatherData([]);
+                                    }, 900);
                                 }}
                                 icon={faLocationCrosshairs}
                             />
@@ -496,26 +502,6 @@ const DisplayData = ({
                             10-day forecast
                         </div>
                         <div className="ten_day_forecast_bg">
-                            {/* key prop error here */}
-                            {/* {tenDayForecastMasterArray.map((item, index) => {
-                                return [
-                                    <div className="ten_day_forecast_rows">
-                                        <div className="ten_day_forecast_column_day">
-                                            {item[0]}
-                                        </div>
-                                        <div className="ten_day_forecast_column_icon">
-                                            {item[1]}
-                                        </div>
-                                        <div className="ten_day_forecast_column_high">
-                                            {item[2]}
-                                        </div>
-                                        <div className="ten_day_forecast_column_low">
-                                            {item[3]}
-                                        </div>
-                                    </div>,
-                                    <hr className="ten_day_forecast_hr" />,
-                                ];
-                            })} */}
                             {tenDayForecastMap}
                         </div>
                     </div>
