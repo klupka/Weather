@@ -3,7 +3,7 @@ import * as icons from "../icons/Icons";
 import PrecChart from "./PrecChart";
 import Search from "./Search";
 import DisplaySearchResults from "./DisplaySearchResults";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLocationDot,
@@ -11,6 +11,7 @@ import {
     faMagnifyingGlass,
     faXmark,
     faLocationCrosshairs,
+    faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 
 const DisplayData = ({
@@ -22,12 +23,12 @@ const DisplayData = ({
     searchResults,
 }) => {
     const [clearInput, setClearInput] = useState("");
-    // console.log("weatherData", weatherData);
+    console.log("weatherData", weatherData);
     // console.log("IPData", IPData);
 
     // If day:
     if (weatherData.current.is_day === 1) {
-        console.log("day detected");
+        // console.log("day detected");
         document.documentElement.style.backgroundColor = "#3a7aba";
         document.documentElement.style.background =
             "linear-gradient(#6bb7ff, #3a7aba)";
@@ -35,7 +36,7 @@ const DisplayData = ({
     }
     // If night:
     if (weatherData.current.is_day === 0) {
-        console.log("night detected");
+        // console.log("night detected");
         document.documentElement.style.backgroundColor = "#3a7aba";
         document.documentElement.style.background =
             "linear-gradient(#04051a, #2d4265)";
@@ -45,13 +46,6 @@ const DisplayData = ({
     // Set city and region
     const region = IPData.region_code;
     const city = IPData.city;
-    // const cityRegionStr = "";
-    // if (region === undefined) {
-    //     console.log("region undefined");
-    //     cityRegionStr = city;
-    // } else {
-    //     cityRegionStr = `${city}, ${region}`;
-    // }
 
     // Used a refresher
     const [counter, setCounter] = useState(0);
@@ -208,6 +202,20 @@ const DisplayData = ({
         tenDayWeatherIcons.push(icon);
     }
 
+    // Create array to store next 10 days of weather descriptions
+    let tenDayWeatherDescriptions = [];
+    for (let i = 0; i < tenDayWeatherCode.length; i++) {
+        let desc = checkWMOCodes(tenDayWeatherCode[i]);
+        tenDayWeatherDescriptions.push(desc);
+    }
+
+    // Create array to store next 10 days of precipitation maxes
+    let tenDayWeatherPrecMax =
+        weatherData.daily.precipitation_probability_max.slice(0, 10);
+    for (let i = 0; i < tenDayWeatherPrecMax.length; i++) {
+        tenDayWeatherPrecMax[i] = `${tenDayWeatherPrecMax[i]}%`;
+    }
+
     // WMO code table. I tried using switch, but this is the only way it worked.
     function checkWMOCodes(code) {
         let descStr;
@@ -316,8 +324,10 @@ const DisplayData = ({
         tenDayForecastMasterArray.push([
             formattedTenDayDates[i],
             tenDayWeatherIcons[i],
+            tenDayWeatherDescriptions[i],
             tenDayHighsAndLows[i][0],
             tenDayHighsAndLows[i][1],
+            tenDayWeatherPrecMax[i],
         ]);
     }
 
@@ -359,14 +369,24 @@ const DisplayData = ({
                         <div className="ten_day_forecast_column_day">
                             {item[0]}
                         </div>
-                        <div className="ten_day_forecast_column_icon">
-                            {item[1]}
+                        <div className="ten_day_forecast_column_weather_icon_desc">
+                            {item[1]}{" "}
+                            <span className="ten_day_forecast_column_weather_desc">
+                                {item[2]}
+                            </span>
                         </div>
                         <div className="ten_day_forecast_column_high">
-                            {item[2]}
+                            <b>{item[3]}</b>
+                            <span className="ten_day_forecast_column_separator">
+                                |
+                            </span>
+                            <span className="ten_day_forecast_column_low">
+                                {item[4]}
+                            </span>
                         </div>
-                        <div className="ten_day_forecast_column_low">
-                            {item[3]}
+                        <div className="ten_day_forecast_column_rain_prec">
+                            {icons.raindrop}
+                            {item[5]}
                         </div>
                     </div>
                 </div>
@@ -378,14 +398,24 @@ const DisplayData = ({
                         <div className="ten_day_forecast_column_day">
                             {item[0]}
                         </div>
-                        <div className="ten_day_forecast_column_icon">
+                        <div className="ten_day_forecast_column_weather_icon_desc">
                             {item[1]}
+                            <span className="ten_day_forecast_column_weather_desc">
+                                {item[2]}
+                            </span>
                         </div>
                         <div className="ten_day_forecast_column_high">
-                            {item[2]}
+                            <b>{item[3]}</b>
+                            <span className="ten_day_forecast_column_separator">
+                                |
+                            </span>
+                            <span className="ten_day_forecast_column_low">
+                                {item[4]}
+                            </span>
                         </div>
-                        <div className="ten_day_forecast_column_low">
-                            {item[3]}
+                        <div className="ten_day_forecast_column_rain_prec">
+                            {icons.raindrop}
+                            {item[5]}
                         </div>
                     </div>
                     <hr className="TDF_hr"></hr>
@@ -393,6 +423,15 @@ const DisplayData = ({
             );
         }
     });
+
+    const ref = useRef(null);
+    const scrollToNext = () => {
+        ref.current?.scrollRight;
+    };
+
+    const scroll = (scrollOffset) => {
+        ref.current.scrollLeft += scrollOffset;
+    };
 
     return (
         <>
@@ -464,7 +503,10 @@ const DisplayData = ({
                         {currentWeatherDesc}
                     </div>
                     <div className="high_low_container">
-                        <span className="high_low_container_high">{high}°</span>{" "}
+                        <span className="high_low_container_high">{high}°</span>
+                        <span className="ten_day_forecast_column_separator">
+                            |
+                        </span>
                         <span className="high_low_container_low">{low}°</span>
                     </div>
                     <div className="feels_like_container">
@@ -475,7 +517,28 @@ const DisplayData = ({
                         <div className="hourly_forecast_title">
                             Hourly forecast
                         </div>
-                        <div className="hourly_forecast_bg">
+                        <div className="hourly_forecast_btn_container">
+                            <button
+                                onClick={() => {
+                                    scroll(-650);
+                                }}
+                                className="hourly_forecast_btn_left"
+                            >
+                                <FontAwesomeIcon
+                                    icon={faArrowRight}
+                                    flip="horizontal"
+                                />
+                            </button>
+                            <button
+                                onClick={() => {
+                                    scroll(650);
+                                }}
+                                className="hourly_forecast_btn_right"
+                            >
+                                <FontAwesomeIcon icon={faArrowRight} />
+                            </button>
+                        </div>
+                        <div className="hourly_forecast_bg" ref={ref}>
                             <div className="hourly_forecast_data_container">
                                 {hourlyTimeAndTemp.map((item, index) => (
                                     <div
@@ -533,8 +596,10 @@ const DisplayData = ({
                     </div>
 
                     <div className="prec_graph_container">
-                        <div className="prec_graph_title">Precipitation</div>
                         <div className="prec_graph_bg">
+                            <div className="prec_graph_title">
+                                Precipitation
+                            </div>
                             <PrecChart
                                 hour={hour}
                                 twentyFourHourTimeSlice={

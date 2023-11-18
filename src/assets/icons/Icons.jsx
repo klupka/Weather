@@ -1,3 +1,33 @@
+export const raindrop = (
+    <svg
+        height="32px"
+        version="1.1"
+        viewBox="0 0 32 32"
+        width="32px"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+        <title />
+        <desc />
+        <defs />
+        <g
+            fill="none"
+            fillRule="evenodd"
+            id="Page-1"
+            stroke="none"
+            strokeWidth="1"
+        >
+            <g fill="#615C9A" id="icon-37-raindrop">
+                <path
+                    d="M12,18.2105263 C12.0000002,15.6842105 16,10 16,10 C16,10 20,15.6842105 20,18.2105263 C20,20.3033949 18.2091391,22 16,22 C13.7908609,22 12,20.3033949 12,18.2105263 Z"
+                    id="raindrop"
+                />
+            </g>
+        </g>
+    </svg>
+);
+
 export const sun = (
     <svg
         height="20.315mm"

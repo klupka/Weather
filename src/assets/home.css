@@ -18,6 +18,7 @@ html {
     color: white;
     /* overflow-y: scroll; */
     overflow: visible;
+    scroll-behavior: smooth;
 }
 
 *::-webkit-scrollbar:vertical {
@@ -339,15 +340,16 @@ html {
     margin-bottom: 0.5rem;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .high_low_container_high {
-    margin-right: 0.25rem;
+    font-weight: bold;
 }
 
 .high_low_container_low {
-    margin-left: 0.25rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
 }
 
 .feels_like_container {
@@ -408,6 +410,46 @@ html {
     color: aqua;
 }
 
+.hourly_forecast_btn_container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top: 0;
+}
+
+.hourly_forecast_btn_left {
+    all: unset;
+    position: absolute;
+    left: -8px;
+    top: 3rem;
+    background: rgba(255, 255, 255);
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    height: 2rem;
+    width: 2rem;
+    filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.281));
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hourly_forecast_btn_right {
+    all: unset;
+    position: absolute;
+    right: -8px;
+    top: 3rem;
+    background: rgba(255, 255, 255);
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    height: 2rem;
+    width: 2rem;
+    filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.281));
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .hourly_forecast_container {
     width: 100%;
     max-width: 700px;
@@ -430,11 +472,13 @@ html {
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
-    max-width: 85vw;
+    scroll-behavior: smooth;
+    max-width: 89.5vw;
 }
 
 .hourly_forecast_data_container {
     display: flex;
+    width: 100%;
 }
 
 .hourly_forecast_time_and_temp {
@@ -442,8 +486,8 @@ html {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
 
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
 .hourly_time {
@@ -488,22 +532,30 @@ html {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .ten_day_forecast_column_day {
     display: flex;
     align-items: center;
-
+    justify-content: left;
     font-size: 1rem;
-    width: 45%;
+    width: 3rem;
 }
 
-.ten_day_forecast_column_icon {
+.ten_day_forecast_column_weather_icon_desc {
     display: flex;
-    justify-content: center;
-
-    width: 25%;
+    justify-content: left;
+    align-items: center;
+    font-size: 0.9rem;
+    width: 10rem;
 }
+.ten_day_forecast_column_weather_icon_desc svg {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
 .ten_day_forecast_column_icon svg {
     width: 2.5rem;
     height: 2.5rem;
@@ -514,20 +566,30 @@ html {
     align-items: center;
     justify-content: center;
 
-    font-size: 1.2rem;
-    width: 15%;
+    font-size: 1.1rem;
     text-align: center;
+    width: 5rem;
 }
 
 .ten_day_forecast_column_low {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 1.2rem;
-    width: 15%;
+    font-size: 0.9rem;
     text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+}
+
+.ten_day_forecast_column_rain_prec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 4rem;
+}
+
+.ten_day_forecast_column_separator {
     color: rgba(255, 255, 255, 0.5);
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
 }
 
 .TDF_hr {
@@ -603,28 +665,34 @@ html {
 
 .prec_graph_container {
     width: 100%;
+    margin-top: 1rem;
 }
 
 .prec_graph_bg {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     border: 2px solid rgba(255, 255, 255, 0.1);
-
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .prec_graph_title {
     font-size: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     margin-top: 1rem;
+    display: flex;
+    justify-content: center;
 }
 
 .graph_container {
-    width: 620px;
-    height: 200px;
-    padding-bottom: 1.5rem;
-    padding-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.5rem;
+    width: 630px;
+    height: 170px;
+    /* padding-bottom: 1.5rem;
+    padding-top: 1.5rem; */
 }
 
 .graph_container_body {
@@ -637,6 +705,16 @@ html {
     }
 }
 
+@media only screen and (max-width: 540px) {
+    .ten_day_forecast_column_weather_desc {
+        display: none;
+    }
+
+    .ten_day_forecast_column_weather_icon_desc {
+        width: 2.5rem;
+    }
+}
+
 @media screen and (max-width: 1880px) {
     /* fix padding on hourly forecast temp in mobile mode */
     .hourly_forecast_data_cell:last-child {
@@ -645,7 +723,7 @@ html {
 }
 
 @media screen and (min-width: 450px) {
-    ::-webkit-scrollbar {
+    /* ::-webkit-scrollbar {
         width: 14px;
         height: 35px;
         position: absolute;
@@ -656,5 +734,8 @@ html {
         background-clip: padding-box;
         border-radius: 9999px;
         background-color: rgba(255, 255, 255, 0.25);
+    } */
+    ::-webkit-scrollbar {
+        display: none;
     }
 }

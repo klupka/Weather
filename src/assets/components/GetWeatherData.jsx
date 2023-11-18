@@ -3,7 +3,7 @@ import { useEffect } from "react";
 const GetWeatherData = ({ setWeatherData, IPData }) => {
     const forecastBaseURL = "https://api.open-meteo.com/v1/forecast";
     const forecastParams =
-        "&current=temperature_2m,apparent_temperature,is_day,relative_humidity_2m,wind_speed_10m&hourly=temperature_2m,precipitation_probability&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=GMT&forecast_days=14&current=weather_code&hourly=weather_code&daily=weather_code&wind_speed_unit=mph";
+        "&current=temperature_2m,apparent_temperature,is_day,relative_humidity_2m,wind_speed_10m&hourly=temperature_2m,precipitation_probability&daily=precipitation_probability_max,weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&timezone=GMT&forecast_days=14&current=weather_code&hourly=weather_code&daily=weather_code&wind_speed_unit=mph";
 
     if (IPData.length !== 0) {
         //const latCoord = IPData.lat;
