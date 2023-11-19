@@ -10,6 +10,7 @@ function App() {
     const [IPData, setIPData] = useState([]);
     const [weatherData, setWeatherData] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
+    const [tempScale, setTempScale] = useState("");
 
     // This, below, works because the if statement is reevaluated every time a state is modified, thus working its way to the bottom.
     // If IPdata is empty, then get it.
@@ -23,7 +24,11 @@ function App() {
         weatherData.length === 0
     ) {
         return (
-            <GetWeatherData setWeatherData={setWeatherData} IPData={IPData} />
+            <GetWeatherData
+                setWeatherData={setWeatherData}
+                IPData={IPData}
+                tempScale={tempScale}
+            />
         );
     }
     // If states are there, render data.
@@ -39,6 +44,8 @@ function App() {
                     IPData={IPData}
                     setSearchResults={setSearchResults}
                     searchResults={searchResults}
+                    setTempScale={setTempScale}
+                    tempScale={tempScale}
                 />
             </>
         );

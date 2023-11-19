@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLocationDot,
-    faArrowsRotate,
+    faTemperatureHalf,
     faMagnifyingGlass,
     faXmark,
     faLocationCrosshairs,
@@ -21,14 +21,15 @@ const DisplayData = ({
     weatherData,
     setSearchResults,
     searchResults,
+    setTempScale,
+    tempScale,
 }) => {
     const [clearInput, setClearInput] = useState("");
-    console.log("weatherData", weatherData);
+    //console.log("weatherData", weatherData);
     // console.log("IPData", IPData);
 
     // If day:
     if (weatherData.current.is_day === 1) {
-        // console.log("day detected");
         document.documentElement.style.backgroundColor = "#3a7aba";
         document.documentElement.style.background =
             "linear-gradient(#6bb7ff, #3a7aba)";
@@ -36,7 +37,6 @@ const DisplayData = ({
     }
     // If night:
     if (weatherData.current.is_day === 0) {
-        // console.log("night detected");
         document.documentElement.style.backgroundColor = "#3a7aba";
         document.documentElement.style.background =
             "linear-gradient(#04051a, #2d4265)";
@@ -344,6 +344,8 @@ const DisplayData = ({
             "lift 0.25s cubic-bezier(1, 0, 0, 1.0)";
 
         document.getElementById("search_input_form").focus();
+        document.getElementById("hourly_forecast_btn_right").style.zIndex = -1;
+        document.getElementById("hourly_forecast_btn_left").style.zIndex = -1;
     };
 
     const closeSearch = () => {
@@ -355,6 +357,12 @@ const DisplayData = ({
         setTimeout(function () {
             document.querySelector("html").style.overflow = "visible";
             document.getElementById("search_container").style.display = "none";
+            document.getElementById(
+                "hourly_forecast_btn_right"
+            ).style.zIndex = 1;
+            document.getElementById(
+                "hourly_forecast_btn_left"
+            ).style.zIndex = 1;
             setClearInput(searchResults); // using searchResults as dummy value to trigger useEffect.
             setSearchResults([]);
         }, 150);
@@ -433,6 +441,11 @@ const DisplayData = ({
         ref.current.scrollLeft += scrollOffset;
     };
 
+    const changeTempScale = () => {
+        setTempScale((current) => !current);
+        setWeatherData([]);
+    };
+
     return (
         <>
             <div id="search_container" className="search_bg">
@@ -467,6 +480,12 @@ const DisplayData = ({
             <div id="flex_container" className="flex_container">
                 <div className="flex_item">
                     <div className="buttons_container">
+                        <button
+                            className="btn_designed"
+                            onClick={changeTempScale}
+                        >
+                            <FontAwesomeIcon icon={faTemperatureHalf} />
+                        </button>
                         <button className="btn_designed">
                             <FontAwesomeIcon
                                 onClick={() => {
@@ -523,6 +542,7 @@ const DisplayData = ({
                                     scroll(-650);
                                 }}
                                 className="hourly_forecast_btn_left"
+                                id="hourly_forecast_btn_left"
                             >
                                 <FontAwesomeIcon
                                     icon={faArrowRight}
@@ -534,6 +554,7 @@ const DisplayData = ({
                                     scroll(650);
                                 }}
                                 className="hourly_forecast_btn_right"
+                                id="hourly_forecast_btn_right"
                             >
                                 <FontAwesomeIcon icon={faArrowRight} />
                             </button>

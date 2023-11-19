@@ -421,7 +421,7 @@ html {
     all: unset;
     position: absolute;
     left: -8px;
-    top: 3rem;
+    top: 3.3rem;
     background: rgba(255, 255, 255);
     border-radius: 50px;
     border: 2px solid rgba(255, 255, 255, 0.1);
@@ -433,11 +433,16 @@ html {
     justify-content: center;
     align-items: center;
 }
+
+.hourly_forecast_btn_left:active {
+    background-color: gray;
+}
+
 .hourly_forecast_btn_right {
     all: unset;
     position: absolute;
     right: -8px;
-    top: 3rem;
+    top: 3.3rem;
     background: rgba(255, 255, 255);
     border-radius: 50px;
     border: 2px solid rgba(255, 255, 255, 0.1);
@@ -448,6 +453,10 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.hourly_forecast_btn_right:active {
+    background-color: gray;
 }
 
 .hourly_forecast_container {
@@ -550,6 +559,7 @@ html {
     align-items: center;
     font-size: 0.9rem;
     width: 10rem;
+    gap: 0.5rem;
 }
 .ten_day_forecast_column_weather_icon_desc svg {
     width: 2.5rem;
@@ -712,6 +722,7 @@ html {
 
     .ten_day_forecast_column_weather_icon_desc {
         width: 2.5rem;
+        gap: 0rem;
     }
 }
 
@@ -723,18 +734,6 @@ html {
 }
 
 @media screen and (min-width: 450px) {
-    /* ::-webkit-scrollbar {
-        width: 14px;
-        height: 35px;
-        position: absolute;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        border: 15px solid rgba(0, 0, 0, 0);
-        background-clip: padding-box;
-        border-radius: 9999px;
-        background-color: rgba(255, 255, 255, 0.25);
-    } */
     ::-webkit-scrollbar {
         display: none;
     }
