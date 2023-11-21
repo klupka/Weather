@@ -2,11 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import "../home.css";
 
-const DisplaySearchResults = ({
-    searchResults,
-    /*new*/ setIPData,
-    setWeatherData,
-}) => {
+const DisplaySearchResults = ({ searchResults, setIPData, setWeatherData }) => {
     const setNewIPData = (item) => (e) => {
         e.preventDefault();
         console.log(item);
@@ -19,16 +15,14 @@ const DisplaySearchResults = ({
         };
 
         document.getElementById("search_container").style.animation =
-            "fadeOutBlur 1s ease-out";
+            "fadeOutBlur 0.5s ease-out";
         document.getElementById("flex_container").style.animation =
-            "flexContainerFadeOutBlur 1s ease-out";
-        // document.getElementById("search_bg").style.animation =
-        //     "fadeOut 1s ease-out";
+            "flexContainerFadeOutBlur 0.5s ease-out";
         setTimeout(function () {
             console.log(newIPData);
             setIPData(newIPData);
             setWeatherData([]);
-        }, 900);
+        }, 400);
     };
 
     if (searchResults.length > 0) {

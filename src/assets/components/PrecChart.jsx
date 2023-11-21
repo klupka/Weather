@@ -56,12 +56,16 @@ const PrecChart = ({ hour, weatherData, twentyFourHourTimeSlice }) => {
                     size: 9,
                 },
             },
+            tooltip: {
+                enabled: false, // <-- this option disables tooltips
+            },
         },
         scales: {
             x: {
                 border: { color: "rgb(255, 255, 255, 0.2" },
                 grid: {
                     drawOnChartArea: false,
+                    display: false,
                     color: "rgb(255, 255, 255, 0.2",
                 },
                 ticks: { color: "#fff" },

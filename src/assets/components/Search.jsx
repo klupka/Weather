@@ -47,6 +47,7 @@ const Search = ({ setSearchResults, searchResults, clearInput }) => {
                 autoComplete="off"
                 onChange={(e) => setSearchStr(e.target.value)}
                 value={searchStr}
+                spellCheck="false"
             ></input>
             <button type="submit" className="btn_search">
                 <FontAwesomeIcon icon={faMagnifyingGlass} />

@@ -203,13 +203,14 @@ html {
     border-color: rgba(255, 255, 255, 0.1);
     margin-top: 1rem;
     padding: 1rem;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .search_results_container_empty {
     margin-top: 5rem;
     display: flex;
     justify-content: center;
-    animation: fadeIn 1s ease-out;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .search_results_item {
@@ -292,7 +293,7 @@ html {
 }
 
 .flex_container * {
-    animation: fadeInBlur 1s ease-out;
+    animation: fadeInBlur 0.5s ease-out;
     /* filter: blur(10px); */
 }
 
@@ -396,18 +397,21 @@ html {
 }
 
 .source_container {
-    display: flex;
-    justify-content: center;
     font-size: 0.8rem;
-    margin-top: 0.25em;
-    margin-bottom: 0.25rem;
-    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .source_container a {
-    padding-left: 0.3rem;
     text-decoration: none;
-    color: aqua;
+    color: #b9d8e8;
+    margin-bottom: 0.5rem;
+}
+
+.source_container span {
+    margin-bottom: 1rem;
 }
 
 .hourly_forecast_btn_container {

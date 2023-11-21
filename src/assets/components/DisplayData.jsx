@@ -377,12 +377,6 @@ const DisplayData = ({
                         <div className="ten_day_forecast_column_day">
                             {item[0]}
                         </div>
-                        <div className="ten_day_forecast_column_weather_icon_desc">
-                            {item[1]}{" "}
-                            <span className="ten_day_forecast_column_weather_desc">
-                                {item[2]}
-                            </span>
-                        </div>
                         <div className="ten_day_forecast_column_high">
                             <b>{item[3]}</b>
                             <span className="ten_day_forecast_column_separator">
@@ -395,6 +389,12 @@ const DisplayData = ({
                         <div className="ten_day_forecast_column_rain_prec">
                             {icons.raindrop}
                             {item[5]}
+                        </div>
+                        <div className="ten_day_forecast_column_weather_icon_desc">
+                            {item[1]}{" "}
+                            <span className="ten_day_forecast_column_weather_desc">
+                                {item[2]}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -406,12 +406,6 @@ const DisplayData = ({
                         <div className="ten_day_forecast_column_day">
                             {item[0]}
                         </div>
-                        <div className="ten_day_forecast_column_weather_icon_desc">
-                            {item[1]}
-                            <span className="ten_day_forecast_column_weather_desc">
-                                {item[2]}
-                            </span>
-                        </div>
                         <div className="ten_day_forecast_column_high">
                             <b>{item[3]}</b>
                             <span className="ten_day_forecast_column_separator">
@@ -424,6 +418,12 @@ const DisplayData = ({
                         <div className="ten_day_forecast_column_rain_prec">
                             {icons.raindrop}
                             {item[5]}
+                        </div>
+                        <div className="ten_day_forecast_column_weather_icon_desc">
+                            {item[1]}
+                            <span className="ten_day_forecast_column_weather_desc">
+                                {item[2]}
+                            </span>
                         </div>
                     </div>
                     <hr className="TDF_hr"></hr>
@@ -443,7 +443,11 @@ const DisplayData = ({
 
     const changeTempScale = () => {
         setTempScale((current) => !current);
-        setWeatherData([]);
+        document.getElementById("flex_container").style.animation =
+            "flexContainerFadeOutBlurFromZero 0.5s ease-out";
+        setTimeout(function () {
+            setWeatherData([]);
+        }, 400);
     };
 
     return (
@@ -492,11 +496,11 @@ const DisplayData = ({
                                     document.getElementById(
                                         "flex_container"
                                     ).style.animation =
-                                        "flexContainerFadeOutBlurFromZero 1s ease-out";
+                                        "flexContainerFadeOutBlurFromZero 0.5s ease-out";
                                     setTimeout(function () {
                                         setIPData([]);
                                         setWeatherData([]);
-                                    }, 900);
+                                    }, 400);
                                 }}
                                 icon={faLocationCrosshairs}
                             />
@@ -539,7 +543,7 @@ const DisplayData = ({
                         <div className="hourly_forecast_btn_container">
                             <button
                                 onClick={() => {
-                                    scroll(-650);
+                                    scroll(-350);
                                 }}
                                 className="hourly_forecast_btn_left"
                                 id="hourly_forecast_btn_left"
@@ -551,7 +555,7 @@ const DisplayData = ({
                             </button>
                             <button
                                 onClick={() => {
-                                    scroll(650);
+                                    scroll(350);
                                 }}
                                 className="hourly_forecast_btn_right"
                                 id="hourly_forecast_btn_right"
@@ -634,13 +638,13 @@ const DisplayData = ({
                     {/* BOTTOM */}
                     <div className="data_sources_container">
                         <div className="source_container">
-                            Location data provided by
+                            <span>Data provided by:</span>
                             <a target="_blank" href="https://ipwhois.io/">
                                 IPWHOIS.IO
                             </a>
-                        </div>
-                        <div className="source_container">
-                            Weather data provided by
+                            <a target="_blank" href="https://geocode.maps.co/">
+                                geocode.maps.co
+                            </a>
                             <a target="_blank" href="https://open-meteo.com/">
                                 Open-Meteo
                             </a>
