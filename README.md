@@ -1,6 +1,6 @@
-# Weather Web App
+# Weather
 
-🔗 <a href="https://klupka.github.io/WeatherWebApp/">Weather Application</a>
+🔗 <a href="https://klupka.github.io/Weather/">Weather</a>
 
 ## Description
 - Fetch and display weather data for your current location and other locations through search functionality.
